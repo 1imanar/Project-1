@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منطقة جيزان</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background-color: #f5e6d3;
+    direction: rtl;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* زر الرجوع */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background-color: #2e5e4e;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    background-color: #244a3d;
+}
+
+/* الهيدر */
+header {
+    background: linear-gradient(to left, #2e5e4e, #3f7a66);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* صورة الغلاف */
+.hero {
+    width: 95%;
+    height: 320px;
+    margin: 20px auto 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    color: white;
+    z-index: 2;
+}
+
+.hero-text h2 {
+    margin: 0;
+    font-size: 34px;
+}
+
+.hero-text p {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+/* المحتوى */
+.container {
+    padding: 40px 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.cards-grid {
+    display: block;
+}
+
+/* الكروت القديمة */
+.card {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    transition: 0.4s;
+    line-height: 1.9;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.rating {
+    color: #f4b400;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* كارد الطقس */
+.weather-card {
+    background: linear-gradient(to left, #3f7a66, #2e5e4e);
+    color: white;
+}
+
+.weather-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.temp {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+/* الأقسام الجديدة */
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    color: #2e5e4e;
+    margin: 45px 0 20px;
+    font-weight: bold;
+}
+
+.places-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.place-card {
+    width: 280px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.place-card:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+.place-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    color: #2e5e4e;
+    font-size: 22px;
+}
+
+.card-content p {
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star.active {
+    color: gold;
+}
+
+.rating-text {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background-color: #2e5e4e;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.map-btn:hover {
+    background-color: #244a3d;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 250px;
+    }
+
+    .hero-text h2 {
+        font-size: 26px;
+    }
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+    .place-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .temp {
+        font-size: 38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<a href="page1.html" class="back-btn">رجوع</a>
+
+<header>
+    <h1>منطقة جيزان</h1>
+    <p>سحر الجنوب بين البحر والجبال وجزر فرسان</p>
+</header>
+
+<div class="hero">
+    <img src="jazann.jpg" alt="منطقة جيزان">
+    <div class="hero-text">
+        <h2>اكتشف جمال جيزان</h2>
+        <p>البحر، الجبال، الجزر، والطبيعة الساحرة</p>
+    </div>
+</div>
+
+<div class="container">
+<div class="cards-grid">
+
+    <!-- كارد الطقس -->
+    <div class="card weather-card">
+        <h2>حالة الطقس في جيزان</h2>
+        <div class="weather-content">
+            <div class="temp">30°</div>
+            <div class="details">
+                <p>🌤 أجواء غائمة جزئياً</p>
+                <p>الرطوبة: 70%</p>
+                <p>الرياح: 14 كم/س</p>
+                <p>تشتهر جيزان بأجوائها الدافئة نسبيًا بسبب موقعها الساحلي على البحر الأحمر، لذلك تعد مناسبة للرحلات البحرية وزيارة الجزر والواجهات البحرية.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- جزر فرسان -->
+    <div class="card">
+        <h2>جزر فرسان</h2>
+        <img src="farasan.jpg" alt="جزر فرسان">
+        <p>تعد جزر فرسان من أجمل الوجهات البحرية في المملكة وتشتهر بمياهها الصافية والشعاب المرجانية.</p>
+        <p>تقع الجزر في البحر الأحمر وتضم مجموعة من الجزر الطبيعية التي تتميز بتنوعها البيئي والحياة البحرية الغنية، حيث يمكن للزوار الاستمتاع بالرحلات البحرية والغوص ومشاهدة الأسماك والشعاب المرجانية.</p>
+        <p>كما تعد الجزر مكاناً مثالياً للاسترخاء والاستمتاع بالطبيعة الساحلية الهادئة والمناظر الخلابة.</p>
+        <div class="rating">★★★★★</div>
+    </div>
+
+    <!-- جبال فيفاء -->
+    <div class="card">
+        <h2>جبال فيفاء</h2>
+        <img src="fefa.jpg" alt="جبال فيفاء">
+        <p>تشتهر جبال فيفاء بمدرجاتها الزراعية الخضراء وطرقها الجبلية الجميلة.</p>
+        <p>تقع جبال فيفاء شرق منطقة جيزان وتتميز بتضاريسها الجبلية الفريدة التي تحيط بها القرى والمزارع التقليدية.</p>
+        <p>كما تشتهر المنطقة بزراعة البن والمحاصيل الزراعية المختلفة وتوفر إطلالات طبيعية مذهلة تجذب السياح ومحبي الطبيعة.</p>
+        <div class="rating">★★★★☆</div>
+    </div>
+
+    <!-- وادي لجب -->
+    <div class="card">
+        <h2>وادي لجب</h2>
+        <img src="lajab.jpg" alt="وادي لجب">
+        <p>وادي لجب أخدود صخري مذهل يوفر تجربة استكشاف ومغامرة لمحبي الطبيعة.</p>
+        <p>يتميز الوادي بجدرانه الصخرية المرتفعة التي تشكل ممرات ضيقة تجري بينها المياه وتحيط بها النباتات الخضراء.</p>
+        <p>يعد الوادي من أشهر المواقع الطبيعية في منطقة جيزان ويقصده الكثير من الزوار للاستمتاع بالمشي بين الصخور والتصوير واستكشاف الطبيعة الخلابة.</p>
+        <div class="rating">★★★★☆</div>
+    </div>
+
+    <!-- الكوفيهات -->
+    <h2 class="section-title">الكوفيهات</h2>
+    <div class="places-container">
+
+        <div class="place-card">
+            <img src="eight-oz.jpg" alt="Eight Oz Coffee">
+            <div class="card-content">
+                <h3>Eight Oz Coffee</h3>
+                <p>كوفي معروف في منطقة جازان ومناسب للقهوة المختصة والجلسات.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+                <a class="map-btn" href="https://maps.yango.com/en-sa/org/eight_oz_coffee/196768136063/" target="_blank">الموقع</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="هاي لاند كوفي .jpg" alt="Highland Cafe">
+            <div class="card-content">
+                <h3>Highland Cafe</h3>
+                <p>كوفي في جازان بأجواء هادئة ومناسب للجلسات المسائية.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+                <a class="map-btn" href="https://maps.yango.com/en-sa/org/highland_cafe/85581363987/" target="_blank">الموقع</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="distillery-cove.jpeg" alt="Distillery Cove">
+            <div class="card-content">
+                <h3>Distillery Cove</h3>
+                <p>كوفي مميز في جازان يناسب محبي القهوة والتجربة الهادئة.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+                <a class="map-btn" href="https://maps.yango.com/en-sa/org/distillery_cove/245358603709/" target="_blank">الموقع</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="barns-jazan.jpg" alt="Barn's">
+            <div class="card-content">
+                <h3>Barn's</h3>
+                <p>من الكوفيهات المعروفة في جازان ويقدم خيارات قهوة متنوعة.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+                <a class="map-btn" href="https://maps.yango.com/en-sa/org/44000270717/reviews/" target="_blank">الموقع</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="figaro-jazan.jpg" alt="Figaro Coffee">
+            <div class="card-content">
+                <h3>Figaro Coffee</h3>
+                <p>كوفي معروف في جازان ومناسب للقاءات والجلسات الخفيفة.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+                <a class="map-btn" href="https://www.tripadvisor.com/Restaurant_Review-g1074315-d10594067-Reviews-Figaro_Coffee-Jazan_Jizan_Province.html" target="_blank">الموقع</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- الحدايق -->
+    <h2 class="section-title">الحدايق</h2>
+    <div class="places-container">
+
+        <div class="place-card">
+            <img src="jazan-waterfront.jpg" alt="الواجهة البحرية بجازان">
+            <div class="card-content">
+                <h3>الواجهة البحرية بجازان</h3>
+                <p>واجهة جميلة للتنزه والمشي وتتميز بمساحات خضراء وأماكن جلوس وإطلالات بحرية.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="amwaj-waterfront.jpg" alt="واجهة أمواج البحرية">
+            <div class="card-content">
+                <h3>واجهة أمواج البحرية</h3>
+                <p>مكان مناسب للعائلات والمشي والاستمتاع بأجواء البحر في جيزان.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- الفعاليات -->
+    <h2 class="section-title">الفعاليات</h2>
+    <div class="places-container">
+
+        <div class="place-card">
+            <img src="jazan-festival.jpg" alt="مهرجان جازان">
+            <div class="card-content">
+                <h3>مهرجان جازان</h3>
+                <p>من أبرز فعاليات المنطقة ويضم عروضاً ثقافية وترفيهية وشعبية متنوعة.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="hareed-festival.jpg" alt="مهرجان الحريد">
+            <div class="card-content">
+                <h3>مهرجان الحريد</h3>
+                <p>فعالية سنوية مشهورة في فرسان مرتبطة بالبحر والتراث المحلي.</p>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <p class="rating-text">0 / 5</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.place-card').forEach(card => {
+    const stars = card.querySelectorAll('.star');
+    const ratingText = card.querySelector('.rating-text');
+
+    stars.forEach((star, index) => {
+        star.onclick = function() {
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i <= index);
+            });
+            ratingText.textContent = (index + 1) + " / 5";
+        };
+    });
+});
+</script>
+
+</body>
+</html>
